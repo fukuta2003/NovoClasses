@@ -25,6 +25,12 @@ namespace NovoClasses
         public SqlConnection conn;
         public SqlDataReader dr;
 
+        public String ParametroID
+        {
+            get { return txtID.Text; }
+            set { txtID.Text = value; }
+        }
+
         public fShow()
         {
             InitializeComponent();
@@ -41,6 +47,7 @@ namespace NovoClasses
             
             InitializeComponent();
 
+          
         }
 
         private void fShow_Load(object sender, EventArgs e)
@@ -59,7 +66,7 @@ namespace NovoClasses
             AbreTabela(Tabela,Campos);
 
             int x = 0;
-      
+            // Monta Cabeçario da Listview
             for(x=0; x < Campos.Length; x++)
             {
                 listView1.Columns.Add(Campos[x].ToString(), 60, HorizontalAlignment.Left);
@@ -67,12 +74,13 @@ namespace NovoClasses
 
             x = Campos.Length;
             int y = 0;
-
+            dr.Read();
+         
             while (dr.Read())
             {
                 item = new ListViewItem(dr[Campos[0]].ToString());
 
-                for(y=1;y < x;y++)
+                for (y=1;y < x;y++)
                 {
                     item.SubItems.Add(dr[Campos[y]].ToString());
        
@@ -82,13 +90,19 @@ namespace NovoClasses
                
             }
 
-
-            listView1.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
-
+            int tamColunas = 0;
+ 
             for (y = 0; y < x; y++)
             {
+                listView1.AutoResizeColumn(y, ColumnHeaderAutoResizeStyle.HeaderSize);
                 listView1.AutoResizeColumn(y, ColumnHeaderAutoResizeStyle.ColumnContent);
+                tamColunas = tamColunas + listView1.Columns[y].Width;
             }
+
+            listView1.Width = tamColunas;
+            this.Width = tamColunas+40;
+            this.StartPosition = FormStartPosition.CenterScreen;
+
 
         }
 
@@ -150,7 +164,18 @@ namespace NovoClasses
 
         }
 
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
+        }
+
+        private void listView1_DoubleClick(object sender, EventArgs e)
+        {
+            int xid = int.Parse(listView1.SelectedItems[0].Text);
+            txtID.Text = xid.ToString();
+            this.Close();
+
+        }
     }
     
 }

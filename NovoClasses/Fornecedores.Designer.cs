@@ -98,6 +98,7 @@
             this.Controls.Add(this.txtID);
             this.Controls.Add(this.label1);
             this.Name = "Fornecedores";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Fornecedores";
             this.Load += new System.EventHandler(this.Fornecedores_Load);
             this.gpoDados.ResumeLayout(false);

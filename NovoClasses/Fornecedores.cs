@@ -77,8 +77,10 @@ namespace NovoClasses
             {
                 
                 fShow fsw = new fShow("FORNECEDORES",
-                    new string[] { "Id", "Nome", "Endereco", "Cidade" , "Cnpj", "Telefone"},"Nome");
-                fsw.Show();
+                    new string[] { "Id", "Nome", "Endereco", "Cidade" , "Cnpj", "Telefone", "Email"},"Nome");
+                fsw.ShowDialog();
+                txtID.Text = fsw.ParametroID.ToString();
+                SendKeys.SendWait("{TAB}");
             }
         }
     }
