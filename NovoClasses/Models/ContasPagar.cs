@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace NovoClasses.Models
 {
-    class ContasPagar : Conexao
+    public class ContasPagar : Conexao
     {
-
+        public List<ContasPagar> contas;
         public int Id { get; set; }
         public DateTime Data { get; set; }
         public String Documento { get; set; }
@@ -28,11 +28,12 @@ namespace NovoClasses.Models
         public String CentroCusto { get; set; }
         public String CentroCusto_Descricao { get; set; }
         public String Historico { get; set; }
+        public String Pago { get; set; }
       
         public ArrayList wlFornecedores = new ArrayList();
         public ArrayList wlCentroCustos = new ArrayList();
-      
 
+       
         public SqlDataReader dr;
 
         //construtor da classe
@@ -41,6 +42,21 @@ namespace NovoClasses.Models
         {
 
         }
+
+        public ContasPagar(int id, string documento, int fornecedor, string fornecedor_Nome, DateTime dataEmissao, DateTime dataVencimento, DateTime dataPagamento, double valorDocumento, string centroCusto, String pago)
+        {
+            Id = id;
+            Documento = documento;
+            Fornecedor = fornecedor;
+            Fornecedor_Nome = fornecedor_Nome;
+            DataEmissao = dataEmissao;
+            DataVencimento = dataVencimento;
+            DataPagamento = dataPagamento;
+            ValorDocumento = valorDocumento;
+            CentroCusto = centroCusto;
+            Pago = Pago;
+        }
+
         public ContasPagar(string documento, int fornecedor, DateTime dataEmissao, DateTime dataVencimento, double valorBruto, string centroCusto, string historico)
         {
             Documento = documento;
@@ -71,7 +87,43 @@ namespace NovoClasses.Models
 
         }
 
-       
+        public void MontaGrade()
+        {
+            contas = new List<ContasPagar>();
+
+            if (conn.State == ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+
+            string StrQuery = "SELECT * FROM CONTASPAGAR";
+            SqlCommand CMD = new SqlCommand();
+            CMD.CommandText = StrQuery;
+            CMD.CommandType = CommandType.Text;
+            CMD.Connection = conn;
+            dr = CMD.ExecuteReader();
+      
+            while (dr.Read())
+            {
+                contas.Add(
+                    new ContasPagar(
+                        int.Parse(dr["Id"].ToString()),
+                        dr["Documento"].ToString(),
+                        int.Parse(dr["fornecedor"].ToString()),
+                        dr["fornecedor_nome"].ToString(),
+                        DateTime.Parse(dr["emissao"].ToString()),
+                        DateTime.Parse(dr["vencimento"].ToString()),
+                        DateTime.Parse(dr["vencimento"].ToString()),
+                        double.Parse(dr["valordocumento"].ToString()),
+                        dr["centrocusto"].ToString(),
+                        dr["pago"].ToString()));
+
+
+            }
+
+            conn.Close();
+
+        }
 
         public void CarregaCentroCustos()
         {
@@ -130,8 +182,9 @@ namespace NovoClasses.Models
 
         }
 
-        public void ConsultaPagarID()
+        public bool ConsultaPagarID()
         {
+            bool xRetorno = false;
 
             if (conn.State == ConnectionState.Closed)
             {
@@ -168,11 +221,15 @@ namespace NovoClasses.Models
                     CentroCusto_Descricao = dr["centrocusto_descricao"].ToString();
                     Historico = dr["historico"].ToString();
 
+                    xRetorno = true;
+                } else
+                {
+                    xRetorno = false;
                 }
             }
 
             conn.Close();
-
+            return xRetorno;
         }
 
         public bool InserirDados(bool pIncluir)
@@ -264,8 +321,10 @@ namespace NovoClasses.Models
 
         }
 
-        public void ConsultaFornecedorID(int pID)
+        public bool ConsultaFornecedorID(int pID)
         {
+            bool ret = false;
+
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -283,11 +342,16 @@ namespace NovoClasses.Models
                 if (dr["Id"].ToString() == pID.ToString())
                 {
                     Fornecedor_Nome = dr["Nome"].ToString();
+                    ret = true;
+                } else
+                {
+                    Fornecedor_Nome = "";
+                    ret = false;
                 }
             }
 
             conn.Close();
-
+            return ret;
 
         }
         public void CarregaFornecedores()

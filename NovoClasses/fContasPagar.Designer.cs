@@ -66,6 +66,7 @@
             this.txtData = new System.Windows.Forms.DateTimePicker();
             this.lblDataPagamento = new System.Windows.Forms.Label();
             this.lblTotalDocumento = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.gpoDoc.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,9 +85,11 @@
             this.txtID.Location = new System.Drawing.Point(14, 31);
             this.txtID.Margin = new System.Windows.Forms.Padding(2);
             this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(72, 20);
+            this.txtID.Size = new System.Drawing.Size(64, 20);
             this.txtID.TabIndex = 1;
             this.txtID.TextChanged += new System.EventHandler(this.txtID_TextChanged);
+            this.txtID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtID_KeyDown);
+            this.txtID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtID_KeyPress);
             this.txtID.Leave += new System.EventHandler(this.txtID_Leave);
             // 
             // label2
@@ -358,7 +361,7 @@
             this.gpoDoc.BackColor = System.Drawing.Color.Maroon;
             this.gpoDoc.Controls.Add(this.button1);
             this.gpoDoc.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.gpoDoc.Location = new System.Drawing.Point(195, 10);
+            this.gpoDoc.Location = new System.Drawing.Point(149, 10);
             this.gpoDoc.Margin = new System.Windows.Forms.Padding(2);
             this.gpoDoc.Name = "gpoDoc";
             this.gpoDoc.Padding = new System.Windows.Forms.Padding(2);
@@ -470,11 +473,23 @@
             this.lblTotalDocumento.TabIndex = 33;
             this.lblTotalDocumento.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(391, 54);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(43, 31);
+            this.button2.TabIndex = 34;
+            this.button2.Text = "...";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // fContasPagar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(446, 447);
+            this.ClientSize = new System.Drawing.Size(442, 447);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.lblTotalDocumento);
             this.Controls.Add(this.lblDataPagamento);
             this.Controls.Add(this.txtData);
@@ -516,6 +531,7 @@
             this.Name = "fContasPagar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Contas a Pagar";
+            this.Activated += new System.EventHandler(this.fContasPagar_Activated);
             this.Load += new System.EventHandler(this.fContasPagar_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fContasPagar_KeyDown);
             this.gpoDoc.ResumeLayout(false);
@@ -527,7 +543,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtDocumento;
@@ -563,5 +578,7 @@
         private System.Windows.Forms.DateTimePicker txtData;
         private System.Windows.Forms.Label lblDataPagamento;
         private System.Windows.Forms.Label lblTotalDocumento;
+        private System.Windows.Forms.TextBox txtID;
+        private System.Windows.Forms.Button button2;
     }
 }

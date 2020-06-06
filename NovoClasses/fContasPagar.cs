@@ -18,17 +18,31 @@ namespace NovoClasses
         // caso o usuario clique no botão salvar
 
         bool wpIncluir = true;
-        
+
         // quando ela estiver TRUE vai incluir, se tiver FALSE vai somente alterar
         // esse controle TRUE ou FALSE é alterado no EVENTO txtID_LEAVE
 
         // *************
+
+        int xIdPrincipal;
 
         ContasPagar cp3 = new ContasPagar();  // instancia um objeto da  classe sem argumentos
 
         public fContasPagar()
         {
             InitializeComponent();
+        }
+        public fContasPagar(string pId) : this()
+        {
+
+           // xIdPrincipal = int.Parse(pId.ToString());
+            
+        }
+        private void fContasPagar_Activated(object sender, EventArgs e)
+        {
+
+           // txtID.Text = xIdPrincipal.ToString();
+
         }
 
         private void fContasPagar_Load(object sender, EventArgs e)
@@ -65,6 +79,8 @@ namespace NovoClasses
             txtData.Text = DataHoje.ToString("dd/MM/yyyy");
             cp3.Documento = "";
             txtDocumento.Text = cp3.Documento.ToString();
+
+            
             
         }
 
@@ -91,8 +107,8 @@ namespace NovoClasses
                         
             if (Verifica()==true)
             {
-                InsereDadosnaClasse();
-                cp3.InserirDados(wpIncluir);
+                InsereDadosnaClasse();  // PASSAR CONTEUDO DO FORMULARIO PARA CLASSE
+                cp3.InserirDados(wpIncluir); // SALVAR NO BANCO DE DADOS
                 
             } else
             {
@@ -138,6 +154,7 @@ namespace NovoClasses
             
             if (e.KeyChar == 13)
             {
+                e.Handled = true;
                 cp3.Fornecedor_Nome = "";
 
                if (txtFornecedor.Text=="")
@@ -146,12 +163,12 @@ namespace NovoClasses
                     txtFornecedor.Focus();
                 } else
                 {
-                    cp3.ConsultaFornecedorID(int.Parse(txtFornecedor.Text));
-                    if(cp3.Fornecedor_Nome != "")
+                    if(cp3.ConsultaFornecedorID(int.Parse(txtFornecedor.Text)))
                     {
                         lblFornecedor.Text = cp3.Fornecedor_Nome.ToString();
                         txtEmissao.Focus();
-                    } else
+                    }
+                    else
                     {
                         MessageBox.Show("Código não encontrado !");
                         txtFornecedor.Focus();
@@ -381,7 +398,7 @@ namespace NovoClasses
             CalculaValorDocumento();
         }
 
-        private void txtCentrodeCustos_Leave(object sender, EventArgs e)
+        private void txtCentrodeCustos_Leave(object sender, EventArgs e) // leave ocorre quando o objeto perde o foco
         {
             if(txtCentrodeCustos.Text != "") { 
                 cp3.ConsultaCentroCustosID(txtCentrodeCustos.Text);
@@ -466,12 +483,22 @@ namespace NovoClasses
                 wpIncluir = true; // INCLUIR AO CLICAR EM SALVAR
             } else
             {
-                cp3.Id = int.Parse(txtID.Text);
-                cp3.ConsultaPagarID();
-                // apos fazer a consulta devemos buscar os dados da classe e colocar no formulario
-                // chamando a funcao BuscaDados();
-                BuscaDados();
-                wpIncluir = false; // ALTERAR AO CLICAR EM SALVAR
+                cp3.Id = int.Parse(txtID.Text); // passando o ID digitado para a classe.
+
+                if (cp3.ConsultaPagarID()==true)
+                {
+                    // apos fazer a consulta devemos buscar os dados da classe e colocar no formulario
+                    // chamando a funcao BuscaDados();
+                    // ALTERAR AO CLICAR EM SALVAR
+                    BuscaDados(); // função abaixo que retorna os dados da classe para o formulário
+                    wpIncluir = false; // false não vai incluir, apenas alterar (update)
+                    txtDocumento.Focus();
+
+                } else
+                {
+                    MessageBox.Show("ID Não encontrado !");
+                    txtID.Focus();
+                }
             }
 
         }
@@ -498,6 +525,37 @@ namespace NovoClasses
         }
         private void txtID_TextChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void txtID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar==13)
+            {
+                e.Handled = true;
+                txtDocumento.Focus(); // tirando o foco do txtdocumento, aciona o LEAVE
+            }
+        }
+
+        private void txtID_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F2)
+            {
+                fContasPagar_Show fs = new fContasPagar_Show();
+                
+                fs.ShowDialog();
+                
+                txtID.Text = fs.ParametroID;
+
+                SendKeys.SendWait("{ENTER}");
+
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Fornecedores forn = new Fornecedores();
+            forn.ShowDialog();
 
         }
     }

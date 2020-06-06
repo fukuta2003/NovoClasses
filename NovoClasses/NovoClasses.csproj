@@ -53,23 +53,51 @@
     <Compile Include="fContasPagar.Designer.cs">
       <DependentUpon>fContasPagar.cs</DependentUpon>
     </Compile>
+    <Compile Include="fContasPagar_Show.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fContasPagar_Show.Designer.cs">
+      <DependentUpon>fContasPagar_Show.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Fornecedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fornecedores.Designer.cs">
+      <DependentUpon>Fornecedores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fShow.Designer.cs">
+      <DependentUpon>fShow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Clientes.cs" />
     <Compile Include="Models\Conexao.cs" />
     <Compile Include="Models\ContasPagar.cs" />
+    <Compile Include="Models\Fornecedores.cs" />
     <Compile Include="Models\Validacao.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="fContasPagar.resx">
       <DependentUpon>fContasPagar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="fContasPagar_Show.resx">
+      <DependentUpon>fContasPagar_Show.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fornecedores.resx">
+      <DependentUpon>Fornecedores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fShow.resx">
+      <DependentUpon>fShow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -79,6 +107,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Models\ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
@@ -93,6 +122,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pesquisar.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
