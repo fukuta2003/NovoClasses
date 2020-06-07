@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
+using System.Windows.Forms;
 
 namespace NovoClasses.Models
 {
@@ -29,7 +26,7 @@ namespace NovoClasses.Models
         // objetos para uso com banco de dados
 
         public SqlDataReader dr;
-         
+
 
         // Construtor Padrão sem argumentos
         public Fornecedores()
@@ -73,7 +70,7 @@ namespace NovoClasses.Models
 
             }
             string StrQuery = "SELECT * FROM Fornecedores WHERE Id = " + pID.ToString();
-            SqlCommand cmd = new SqlCommand(StrQuery,conn);
+            SqlCommand cmd = new SqlCommand(StrQuery, conn);
             //cmd.CommandText = StrQuery;
             cmd.CommandType = CommandType.Text;
             cmd.Connection = conn;
@@ -110,7 +107,124 @@ namespace NovoClasses.Models
 
         }
 
+        public bool Salvar_Dados(bool pIncluir)
+        {
 
+            if (conn.State == ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+            String strquery;
+
+            if (pIncluir)
+            {
+                // inclusao
+                strquery = "INSERT INTO FORNECEDORES (" +
+                        "nome," +
+                        "endereco," +
+                        "bairro," +
+                        "cidade," +
+                        "estado," +
+                        "cep," +
+                        "telefone," +
+                        "celular," +
+                        "email," +
+                        "cnpj," +
+                        "ie," +
+                        "obs) VALUES (@nome, @endereco, @bairro, @cidade," +
+                        "@estado,@cep,@telefone,@celular,@email," +
+                        "@cnpj,@ie,@obs)";
+            }
+            else
+            {
+                // ALTERACAO
+                strquery = "UPDATE FORNECEDORES SET " +
+                    "nome=@nome," +
+                    "endereco=@endereco," +
+                    "bairro=@bairro," +
+                    "cidade=@cidade," +
+                    "estado=@estado," +
+                    "cep=@cep," +
+                    "telefone=@telefone," +
+                    "celular=@celular," +
+                    "email=@email," +
+                    "cnpj=@cnpj," +
+                    "ie=@ie," +
+                    "obs=@obs WHERE id=" + Id;
+
+            }
+            SqlCommand cmd = new SqlCommand(strquery, conn);
+            //  adiciona os dados da classe nos objetos do CMD
+            cmd.Parameters.AddWithValue("@nome", Nome);
+            cmd.Parameters.AddWithValue("@endereco", Endereco);
+            cmd.Parameters.AddWithValue("@bairro", Bairro);
+            cmd.Parameters.AddWithValue("@cidade", Cidade);
+            cmd.Parameters.AddWithValue("@estado", Estado);
+            cmd.Parameters.AddWithValue("@cep", Cep);
+            cmd.Parameters.AddWithValue("@telefone", Telefone);
+            cmd.Parameters.AddWithValue("@celular", Celular);
+            cmd.Parameters.AddWithValue("@email", Email);
+            cmd.Parameters.AddWithValue("@cnpj", Cnpj);
+            cmd.Parameters.AddWithValue("@ie", Ie);
+            cmd.Parameters.AddWithValue("@obs", Obs);
+
+            // cmd.Parameters.AddWithValue("@baixa", DataPagamento);
+
+            cmd.CommandType = CommandType.Text;
+
+            // TENTA REALIZAR A INCLUSAO, CASO TENHA SUCESSO ELA SALVA OS DADOS E RETORNA (OK)
+            // SE ALGUM ERRO ACONTECER, É CRIADA UMA EXCEPTION QUE MOSTRA NA TELA O ERRO OCORRIDO
+            // E FINALMENTE (FINNALY) CONCLUI A OPERACAO.
+
+            try
+            {
+                int i = cmd.ExecuteNonQuery();  // ESTA LINHA SALVA DOS DADOS NO BANCO DE DADOS E RETORNA QUANTAS LINHAS FORAM AFETADAS.
+                if (i > 0)
+
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro sistema: " + ex.ToString());
+            }
+            finally
+            {
+             
+                conn.Close();
+            }
+            return false;
+
+        }
+
+        public bool Apaga(int pId)
+        {
+            bool ret = false;
+
+            Inicializa();
+
+            if (conn.State == ConnectionState.Closed)
+            {
+                conn.Open();
+
+            }
+            string StrQuery = "DELETE FROM Fornecedores WHERE Id = " + pId.ToString();
+            SqlCommand cmd = new SqlCommand(StrQuery, conn);
+            //cmd.CommandText = StrQuery;
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = conn;
+            
+            int i = cmd.ExecuteNonQuery();  // ESTA LINHA EXECUTA A QUERY DE DADOS E RETORNA QUANTAS LINHAS FORAM AFETADAS.
+            if (i > 0) { 
+               ret=true;  // deletou
+            } else
+            {
+                ret=false;   // não deletou.
+            }
+
+            conn.Close();
+            return ret;
+
+        }
 
     }
 }

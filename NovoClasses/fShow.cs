@@ -74,14 +74,25 @@ namespace NovoClasses
 
             x = Campos.Length;
             int y = 0;
-            dr.Read();
-         
+            string TipoDados = "";
+            string Mascara = "";
+            
             while (dr.Read())
             {
+                
                 item = new ListViewItem(dr[Campos[0]].ToString());
 
                 for (y=1;y < x;y++)
                 {
+                    Mascara = "";
+                    TipoDados = dr.GetDataTypeName(y).ToString();
+                    
+                    if (TipoDados.ToString()=="Date" || TipoDados == "DateTime")
+                    {
+                        Mascara = "dd/MM/yyyy";
+                    }
+
+
                     item.SubItems.Add(dr[Campos[y]].ToString());
        
                 }
@@ -170,6 +181,21 @@ namespace NovoClasses
         }
 
         private void listView1_DoubleClick(object sender, EventArgs e)
+        {
+            Finaliza();
+        }
+
+        private void listView1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar==13)
+            {
+                e.Handled = true;
+                Finaliza();
+
+            }
+        }
+
+        private void Finaliza()
         {
             int xid = int.Parse(listView1.SelectedItems[0].Text);
             txtID.Text = xid.ToString();

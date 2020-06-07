@@ -38,15 +38,19 @@ namespace NovoClasses
                 txtNome.Focus();
                 // colocar variavel para incluir
                 wp_Incluir = true; // (true inclui dados no banco de dados)
-
+                lblOperacao.Text = "INCLUSÃO";
+                gpoDados.Enabled = true;  // habilita o grupo de dados
             } else
             {
               
                 if(Forn.Consulta(int.Parse(txtID.Text)))
                 {
-                    txtNome.Text = Forn.Nome.ToString();
+                    BuscaDados();
+                    
                     // variavel para alterar
                     wp_Incluir = false; // (false atualizar dados > update)
+                    lblOperacao.Text = "ALTERAÇÃO";
+                    gpoDados.Enabled = true;  // habilita o grupo de dados
                     txtNome.Focus();
                 } else
                 {
@@ -57,11 +61,7 @@ namespace NovoClasses
             }
         }
 
-        private void txtID_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void txtID_KeyPress(object sender, KeyPressEventArgs e)
         {
             if(e.KeyChar==13)
@@ -82,6 +82,183 @@ namespace NovoClasses
                 txtID.Text = fsw.ParametroID.ToString();
                 SendKeys.SendWait("{TAB}");
             }
+        }
+
+
+        private void BuscaDados() // Busca dados da classe
+        {
+            txtNome.Text = Forn.Nome.ToString();
+            txtEndereco.Text = Forn.Endereco.ToString();
+            txtBairro.Text = Forn.Bairro.ToString();
+            txtCidade.Text = Forn.Cidade.ToString();
+            cmbUF.Text = Forn.Estado.ToString();
+            txtCep.Text = Forn.Cep.ToString();
+            txtTelefone.Text = Forn.Telefone.ToString();
+            txtCelular.Text = Forn.Celular.ToString();
+            txtEmail.Text = Forn.Email.ToString();
+            txtCNPJ.Text = Forn.Cnpj.ToString();
+            txtIE.Text = Forn.Ie.ToString();
+            txtOBS.Text = Forn.Obs.ToString();
+
+
+        }
+
+        private void txtID_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtID_Enter(object sender, EventArgs e)
+        {
+            LimpaDados();
+            gpoDados.Enabled = false;
+            
+        }
+
+        private void LimpaDados()
+        {
+            txtNome.Text = "";
+            txtEndereco.Text = "";
+            txtBairro.Text = "";
+            txtCidade.Text = "";
+            cmbUF.Text = "";
+            txtTelefone.Text = "";
+            txtCelular.Text = "";
+            txtEmail.Text = "";
+            txtOBS.Text = "";
+            txtCep.Text = "";
+            txtCNPJ.Text = "";
+            txtIE.Text = "";
+
+
+        }
+
+        private void cmdSalvar_Click(object sender, EventArgs e)
+        {
+            if(Verifica())
+            {
+                Transporta_Dados_Classe();
+
+                if (Forn.Salvar_Dados(wp_Incluir))
+                {
+                    MessageBox.Show("Dados Salvos com Sucesso !");
+                    txtID.Focus();
+                } else
+                {
+                    MessageBox.Show("Erro, problema sao salvar dados !");
+                    gpoDados.Enabled = true;
+                    txtNome.Focus();
+                    return;
+                }
+
+
+            } else {
+                MessageBox.Show("Alguns dados importantes não foram preenchidos !");
+                txtID.Focus();
+            }
+
+            txtID.Focus();
+
+        }
+
+        private void Transporta_Dados_Classe()
+        {
+            if(!string.IsNullOrEmpty(txtID.Text))
+            {
+                Forn.Id = int.Parse(txtID.Text);
+            }
+            
+            Forn.Nome = txtNome.Text;
+            Forn.Endereco = txtEndereco.Text;
+            Forn.Bairro = txtBairro.Text;
+            Forn.Cidade = txtCidade.Text;
+            Forn.Cep = txtCep.Text;
+            Forn.Estado = cmbUF.Text;
+            Forn.Telefone = txtTelefone.Text;
+            Forn.Celular = txtCelular.Text;
+            Forn.Email = txtEmail.Text;
+            Forn.Cnpj = txtCNPJ.Text;
+            Forn.Ie = txtIE.Text;
+            Forn.Obs = txtOBS.Text;
+
+        }
+
+        private bool Verifica()
+        {
+            bool xret = true;
+            if(string.IsNullOrEmpty(txtNome.Text))
+            {
+                xret = false;
+            } else if(string.IsNullOrEmpty(txtEndereco.Text))
+            {
+                xret = false;
+            } else if (string.IsNullOrEmpty(txtBairro.Text))
+            {
+                xret = false;
+            } else if (string.IsNullOrEmpty(txtCidade.Text))
+            {
+                xret = false;
+            } else if (string.IsNullOrEmpty(txtCep.Text))
+            {
+                xret = false;
+            }
+            else if (string.IsNullOrEmpty(cmbUF.Text))
+            {
+                xret = false;
+            }
+
+            return xret;
+        }
+
+        private void Fornecedores_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+
+            if (e.KeyCode==Keys.Escape)
+            {
+            
+                if (ActiveControl.Name.ToUpper() == "TXTID")
+                {
+                    e.Handled = true;
+                    this.Close();
+
+                } else
+                {
+                    LimpaDados();
+                    gpoDados.Enabled = false;
+                    txtID.Focus();
+
+                }
+            }
+            
+
+
+        }
+
+        private void cmdExcluir_Click(object sender, EventArgs e)
+        {
+            if(Confirma("Posso Excluir esse Fornecedor ?"))
+            {
+                Forn.Apaga(int.Parse(txtID.Text));
+                LimpaDados();
+                gpoDados.Enabled = false;
+                txtID.Focus();
+            }
+        }
+
+        private bool Confirma(string Mensagem)
+        {
+            bool ret = true;
+            DialogResult exemplo1 = MessageBox.Show(Mensagem.ToString(), "Confirme" , MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (exemplo1 == DialogResult.Yes)
+            {
+                ret = true;
+            } else
+            {
+                ret = false;
+            }
+            return ret;
+            
         }
     }
 }
