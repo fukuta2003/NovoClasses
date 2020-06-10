@@ -70,12 +70,16 @@ namespace NovoClasses
             for(x=0; x < Campos.Length; x++)
             {
                 listView1.Columns.Add(Campos[x].ToString(), 60, HorizontalAlignment.Left);
+                cmbPesquisa.Items.Add(Campos[x].ToString().ToUpper()); // adicionar os campos na combobox de pesquisa
             }
 
+            int cols = listView1.Columns.Count;
+            
             x = Campos.Length;
             int y = 0;
             string TipoDados = "";
             string Mascara = "";
+            
             
             while (dr.Read())
             {
@@ -96,25 +100,48 @@ namespace NovoClasses
                     item.SubItems.Add(dr[Campos[y]].ToString());
        
                 }
+               
 
                 listView1.Items.Add(item);
-               
+
+            }
+            
+            int tamColunas = 0;
+
+            if (tamColunas < 150)
+            {
+                tamColunas = 150;
             }
 
-            int tamColunas = 0;
- 
-            for (y = 0; y < x; y++)
+            
+            for (y = 1; y < cols ; y++)
             {
                 listView1.AutoResizeColumn(y, ColumnHeaderAutoResizeStyle.HeaderSize);
                 listView1.AutoResizeColumn(y, ColumnHeaderAutoResizeStyle.ColumnContent);
                 tamColunas = tamColunas + listView1.Columns[y].Width;
             }
 
+            
             listView1.Width = tamColunas;
-            this.Width = tamColunas+40;
-            this.StartPosition = FormStartPosition.CenterScreen;
+
+            int z = (listView1.Width);
+
+            listView1.Columns[cols-1].Width = z;
 
 
+            listView1.Focus();
+            SendKeys.Send("{HOME}");
+            this.Width = tamColunas + 40;
+            
+            // centraliza a tela depois de ter a chamado
+
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
+                          (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
+            this.Refresh();
+            //this.StartPosition = FormStartPosition.CenterScreen;
+
+            
         }
 
 
@@ -197,10 +224,28 @@ namespace NovoClasses
 
         private void Finaliza()
         {
-            int xid = int.Parse(listView1.SelectedItems[0].Text);
+            string xid = listView1.SelectedItems[0].Text;
             txtID.Text = xid.ToString();
             this.Close();
 
+        }
+
+        private void fShow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                if(ActiveControl.Name.ToUpper()=="CMBPESQUISA")
+                {
+                    int xid = 0;
+                    txtID.Text = "";
+                    this.Close();
+
+                } else
+                {
+                    cmbPesquisa.Focus();
+                }
+
+            }
         }
     }
     

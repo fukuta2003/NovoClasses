@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="fCentroCustos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fCentroCustos.Designer.cs">
+      <DependentUpon>fCentroCustos.cs</DependentUpon>
+    </Compile>
     <Compile Include="fContasPagar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +77,7 @@
     <Compile Include="fShow.Designer.cs">
       <DependentUpon>fShow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\CentroCustos.cs" />
     <Compile Include="Models\Clientes.cs" />
     <Compile Include="Models\Conexao.cs" />
     <Compile Include="Models\ContasPagar.cs" />
@@ -78,6 +85,9 @@
     <Compile Include="Models\Validacao.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="fCentroCustos.resx">
+      <DependentUpon>fCentroCustos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="fContasPagar.resx">
       <DependentUpon>fContasPagar.cs</DependentUpon>
     </EmbeddedResource>

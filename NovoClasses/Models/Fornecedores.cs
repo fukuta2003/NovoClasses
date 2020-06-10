@@ -21,6 +21,7 @@ namespace NovoClasses.Models
         public string Cnpj { get; set; }
         public string Ie { get; set; }
         public string Obs { get; set; }
+        public string Pessoa { get; set; }
 
 
         // objetos para uso com banco de dados
@@ -34,6 +35,7 @@ namespace NovoClasses.Models
 
         }
 
+        
         // operaçoes com objetos
 
         public void Inicializa()
@@ -51,6 +53,7 @@ namespace NovoClasses.Models
             Cnpj = "";
             Ie = "";
             Obs = "";
+            Pessoa = "";
         }
 
         // operações com banco de dados 
@@ -92,6 +95,7 @@ namespace NovoClasses.Models
                     Cnpj = dr["cnpj"].ToString();
                     Ie = dr["ie"].ToString();
                     Obs = dr["obs"].ToString();
+                    Pessoa = dr["pessoa"].ToString();
 
                     ret = true;
                 }
@@ -131,9 +135,9 @@ namespace NovoClasses.Models
                         "email," +
                         "cnpj," +
                         "ie," +
-                        "obs) VALUES (@nome, @endereco, @bairro, @cidade," +
+                        "obs, pessoa) VALUES (@nome, @endereco, @bairro, @cidade," +
                         "@estado,@cep,@telefone,@celular,@email," +
-                        "@cnpj,@ie,@obs)";
+                        "@cnpj,@ie,@obs,@pessoa)";
             }
             else
             {
@@ -150,7 +154,7 @@ namespace NovoClasses.Models
                     "email=@email," +
                     "cnpj=@cnpj," +
                     "ie=@ie," +
-                    "obs=@obs WHERE id=" + Id;
+                    "obs=@obs, pessoa=@pessoa WHERE id=" + Id;
 
             }
             SqlCommand cmd = new SqlCommand(strquery, conn);
@@ -167,6 +171,7 @@ namespace NovoClasses.Models
             cmd.Parameters.AddWithValue("@cnpj", Cnpj);
             cmd.Parameters.AddWithValue("@ie", Ie);
             cmd.Parameters.AddWithValue("@obs", Obs);
+            cmd.Parameters.AddWithValue("@pessoa", Pessoa);
 
             // cmd.Parameters.AddWithValue("@baixa", DataPagamento);
 

@@ -296,10 +296,26 @@ namespace NovoClasses
 
         private void txtCentrodeCustos_KeyDown(object sender, KeyEventArgs e)
         {
+            /*
             if (e.KeyCode == Keys.F2)
             {
-                cmbCentroCustos.Visible = true;
-                cmbCentroCustos.Focus();
+                //cmbCentroCustos.Visible = true;
+                //cmbCentroCustos.Focus();
+            }
+            */
+
+            if (e.KeyCode == Keys.F2)
+            {
+
+                fShow fsw = new fShow("CENTROCUSTOS",
+                    new string[] { "Codigo", "Descricao" }, "Codigo");
+                fsw.ShowDialog();
+                txtCentrodeCustos.Text = fsw.ParametroID.ToString();
+                if (txtCentrodeCustos.Text != "")
+                {
+                    SendKeys.SendWait("{TAB}");
+                }
+
             }
         }
 
@@ -556,6 +572,16 @@ namespace NovoClasses
         {
             Fornecedores forn = new Fornecedores();
             forn.ShowDialog();
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            fCentroCustos cc = new fCentroCustos();
+            cc.StartPosition = FormStartPosition.CenterScreen;
+            cc.KeyPreview = true;
+            cc.ShowDialog();
+
 
         }
     }

@@ -96,7 +96,7 @@ namespace NovoClasses.Models
                 conn.Open();
             }
 
-            string StrQuery = "SELECT * FROM CONTASPAGAR";
+            string StrQuery = "SELECT * FROM CONTASPAGAR WITH (INDEX(i_Vencimento)) ORDER BY Vencimento";
             SqlCommand CMD = new SqlCommand();
             CMD.CommandText = StrQuery;
             CMD.CommandType = CommandType.Text;
@@ -132,7 +132,7 @@ namespace NovoClasses.Models
                 conn.Open();
             }
 
-            String StrQuery = "SELECT Codigo, Descricao FROM CENTROCUSTOS ORDER BY DESCRICAO";
+            String StrQuery = "SELECT Codigo, Descricao FROM CENTROCUSTOS WITH (INDEX(i_DESCRICAO)) ORDER BY DESCRICAO";
 
             SqlCommand CMD = new SqlCommand();
 
@@ -163,7 +163,7 @@ namespace NovoClasses.Models
                 conn.Open();
             }
             
-            string StrQuery = "SELECT CODIGO,DESCRICAO FROM CENTROCUSTOS WHERE CODIGO='" + pCodigo + "'";
+            string StrQuery = "SELECT CODIGO,DESCRICAO FROM CENTROCUSTOS WITH (INDEX(i_CODIGO)) WHERE CODIGO='" + pCodigo + "'";
             SqlCommand CMD = new SqlCommand();
             CMD.CommandText = StrQuery;
             CMD.CommandType = CommandType.Text;
@@ -193,7 +193,7 @@ namespace NovoClasses.Models
 
             int xId = int.Parse(Id.ToString());
 
-            string StrQuery = "SELECT * FROM CONTASPAGAR WHERE Id=" + xId.ToString() + ""; 
+            string StrQuery = "SELECT * FROM CONTASPAGAR WITH (INDEX(i_ID)) WHERE Id=" + xId.ToString() + ""; 
             SqlCommand CMD = new SqlCommand();
             CMD.CommandText = StrQuery;
             CMD.CommandType = CommandType.Text;
@@ -330,7 +330,7 @@ namespace NovoClasses.Models
                 conn.Open();
 
             }
-            string StrQuery = "SELECT Id,Nome FROM Fornecedores WHERE Id = " + pID.ToString();
+            string StrQuery = "SELECT Id,Nome FROM Fornecedores WITH (INDEX(i_ID)) WHERE Id = " + pID.ToString();
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = StrQuery;
             cmd.CommandType = CommandType.Text;
@@ -359,7 +359,7 @@ namespace NovoClasses.Models
             int x = 0;
 
             conn.Open();
-            String StrQuery = "SELECT Id,Nome FROM Fornecedores ORDER BY Nome";
+            String StrQuery = "SELECT Id,Nome FROM Fornecedores WITH (INDEX(i_nome)) ORDER BY Nome";
             SqlCommand cmd = new SqlCommand();
             cmd = new SqlCommand(StrQuery, conn);
             dr = cmd.ExecuteReader();

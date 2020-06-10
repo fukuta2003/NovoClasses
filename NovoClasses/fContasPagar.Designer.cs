@@ -67,6 +67,7 @@
             this.lblDataPagamento = new System.Windows.Forms.Label();
             this.lblTotalDocumento = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.gpoDoc.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -281,6 +282,7 @@
             this.lblCentrodeCustos.Name = "lblCentrodeCustos";
             this.lblCentrodeCustos.Size = new System.Drawing.Size(336, 21);
             this.lblCentrodeCustos.TabIndex = 24;
+            this.lblCentrodeCustos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblFornecedor
             // 
@@ -401,7 +403,7 @@
             // 
             this.cmbCentroCustos.BackColor = System.Drawing.Color.Khaki;
             this.cmbCentroCustos.FormattingEnabled = true;
-            this.cmbCentroCustos.Location = new System.Drawing.Point(90, 241);
+            this.cmbCentroCustos.Location = new System.Drawing.Point(91, 241);
             this.cmbCentroCustos.Margin = new System.Windows.Forms.Padding(2);
             this.cmbCentroCustos.Name = "cmbCentroCustos";
             this.cmbCentroCustos.Size = new System.Drawing.Size(337, 21);
@@ -476,19 +478,31 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(391, 54);
+            this.button2.Location = new System.Drawing.Point(397, 54);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(43, 31);
+            this.button2.Size = new System.Drawing.Size(37, 31);
             this.button2.TabIndex = 34;
             this.button2.Text = "...";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(391, 211);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(37, 31);
+            this.button3.TabIndex = 35;
+            this.button3.Text = "...";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // fContasPagar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(442, 447);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.lblTotalDocumento);
             this.Controls.Add(this.lblDataPagamento);
@@ -580,5 +594,6 @@
         private System.Windows.Forms.Label lblTotalDocumento;
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }

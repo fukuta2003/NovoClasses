@@ -30,26 +30,29 @@
         {
             this.listView1 = new System.Windows.Forms.ListView();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.cmbPesquisa = new System.Windows.Forms.ComboBox();
+            this.txtPesquisa = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnPesquisar = new System.Windows.Forms.Button();
             this.txtID = new System.Windows.Forms.TextBox();
+            this.cmbCondicao = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // listView1
             // 
+            this.listView1.Alignment = System.Windows.Forms.ListViewAlignment.Default;
+            this.listView1.AllowColumnReorder = true;
             this.listView1.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.listView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listView1.FullRowSelect = true;
             this.listView1.GridLines = true;
             this.listView1.HideSelection = false;
-            this.listView1.LabelEdit = true;
-            this.listView1.Location = new System.Drawing.Point(12, 59);
+            this.listView1.LabelWrap = false;
+            this.listView1.Location = new System.Drawing.Point(12, 60);
             this.listView1.Margin = new System.Windows.Forms.Padding(4);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(628, 367);
+            this.listView1.ShowGroups = false;
+            this.listView1.Size = new System.Drawing.Size(409, 366);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -66,38 +69,38 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Pesquisa Por";
             // 
-            // comboBox1
+            // cmbPesquisa
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(12, 28);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(166, 24);
-            this.comboBox1.TabIndex = 2;
+            this.cmbPesquisa.FormattingEnabled = true;
+            this.cmbPesquisa.Location = new System.Drawing.Point(12, 28);
+            this.cmbPesquisa.Name = "cmbPesquisa";
+            this.cmbPesquisa.Size = new System.Drawing.Size(107, 24);
+            this.cmbPesquisa.TabIndex = 2;
             // 
-            // textBox1
+            // txtPesquisa
             // 
-            this.textBox1.Location = new System.Drawing.Point(193, 28);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(328, 22);
-            this.textBox1.TabIndex = 3;
+            this.txtPesquisa.Location = new System.Drawing.Point(209, 28);
+            this.txtPesquisa.Name = "txtPesquisa";
+            this.txtPesquisa.Size = new System.Drawing.Size(125, 22);
+            this.txtPesquisa.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(190, 9);
+            this.label2.Location = new System.Drawing.Point(206, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 16);
             this.label2.TabIndex = 4;
             this.label2.Text = "Pesquisa";
             // 
-            // button1
+            // btnPesquisar
             // 
-            this.button1.Location = new System.Drawing.Point(527, 9);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(113, 41);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Pesquisar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnPesquisar.Location = new System.Drawing.Point(340, 12);
+            this.btnPesquisar.Name = "btnPesquisar";
+            this.btnPesquisar.Size = new System.Drawing.Size(81, 41);
+            this.btnPesquisar.TabIndex = 5;
+            this.btnPesquisar.Text = "Pesquisar";
+            this.btnPesquisar.UseVisualStyleBackColor = true;
             // 
             // txtID
             // 
@@ -108,24 +111,43 @@
             this.txtID.TabIndex = 6;
             this.txtID.Visible = false;
             // 
+            // cmbCondicao
+            // 
+            this.cmbCondicao.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCondicao.FormattingEnabled = true;
+            this.cmbCondicao.Items.AddRange(new object[] {
+            "Igual",
+            "Maior que",
+            "Menor que",
+            "Diferente"});
+            this.cmbCondicao.Location = new System.Drawing.Point(125, 28);
+            this.cmbCondicao.Name = "cmbCondicao";
+            this.cmbCondicao.Size = new System.Drawing.Size(78, 24);
+            this.cmbCondicao.TabIndex = 7;
+            // 
             // fShow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(644, 441);
+            this.ClientSize = new System.Drawing.Size(429, 441);
+            this.Controls.Add(this.cmbCondicao);
             this.Controls.Add(this.txtID);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnPesquisar);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.txtPesquisa);
+            this.Controls.Add(this.cmbPesquisa);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listView1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "fShow";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "<F2> Mostra Dados";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.fShow_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fShow_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -135,10 +157,11 @@
 
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ComboBox cmbPesquisa;
+        private System.Windows.Forms.TextBox txtPesquisa;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnPesquisar;
         private System.Windows.Forms.TextBox txtID;
+        private System.Windows.Forms.ComboBox cmbCondicao;
     }
 }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using NovoClasses.Models;
 
+
 namespace NovoClasses
 {
     public partial class Fornecedores : Form
@@ -17,6 +18,8 @@ namespace NovoClasses
         // o models para diferenciar no estanciamento abaixo
 
         Models.Fornecedores Forn = new Models.Fornecedores();
+        Models.Validacao Funcoes = new Models.Validacao();
+
 
         public bool wp_Incluir;
 
@@ -27,11 +30,12 @@ namespace NovoClasses
 
         private void Fornecedores_Load(object sender, EventArgs e)
         {
-
+           
         }
 
         private void txtID_Leave(object sender, EventArgs e)
         {
+
             if (txtID.Text=="")
             {
                 gpoDados.Enabled = true;
@@ -40,6 +44,7 @@ namespace NovoClasses
                 wp_Incluir = true; // (true inclui dados no banco de dados)
                 lblOperacao.Text = "INCLUSÃO";
                 gpoDados.Enabled = true;  // habilita o grupo de dados
+
             } else
             {
               
@@ -52,6 +57,7 @@ namespace NovoClasses
                     lblOperacao.Text = "ALTERAÇÃO";
                     gpoDados.Enabled = true;  // habilita o grupo de dados
                     txtNome.Focus();
+
                 } else
                 {
                     MessageBox.Show("Fornecedor não encontrado !");
@@ -80,7 +86,11 @@ namespace NovoClasses
                     new string[] { "Id", "Nome", "Endereco", "Cidade" , "Cnpj", "Telefone", "Email"},"Nome");
                 fsw.ShowDialog();
                 txtID.Text = fsw.ParametroID.ToString();
-                SendKeys.SendWait("{TAB}");
+                if(txtID.Text!="")
+                {
+                    SendKeys.SendWait("{TAB}");
+                }
+                
             }
         }
 
@@ -99,6 +109,14 @@ namespace NovoClasses
             txtCNPJ.Text = Forn.Cnpj.ToString();
             txtIE.Text = Forn.Ie.ToString();
             txtOBS.Text = Forn.Obs.ToString();
+
+            if (string.IsNullOrEmpty(Forn.Pessoa.ToString()))
+            {
+                cmbPessoa.Text = "JURÍDICA";
+            } else
+            {
+                cmbPessoa.Text = Forn.Pessoa.ToString();
+            }
 
 
         }
@@ -129,6 +147,7 @@ namespace NovoClasses
             txtCep.Text = "";
             txtCNPJ.Text = "";
             txtIE.Text = "";
+            cmbPessoa.Text = "";
 
 
         }
@@ -177,6 +196,7 @@ namespace NovoClasses
             Forn.Telefone = txtTelefone.Text;
             Forn.Celular = txtCelular.Text;
             Forn.Email = txtEmail.Text;
+            Forn.Pessoa = cmbPessoa.Text;
             Forn.Cnpj = txtCNPJ.Text;
             Forn.Ie = txtIE.Text;
             Forn.Obs = txtOBS.Text;
@@ -259,6 +279,65 @@ namespace NovoClasses
             }
             return ret;
             
+        }
+
+        private void txtCNPJ_TextChanged(object sender, EventArgs e)
+        {
+
+            if (cmbPessoa.Text == "FÍSICA")
+            {
+                txtCNPJ.Text = Funcoes.Formata_CPF(txtCNPJ.Text);
+                SendKeys.Send("{END}");
+            }
+
+            if (cmbPessoa.Text == "JURÍDICA")
+            {
+               txtCNPJ.Text = Funcoes.Formata_CNPJ(txtCNPJ.Text);
+               SendKeys.Send("{END}");
+            }
+
+        }
+
+        private void cmbPessoa_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbPessoa_TextChanged(object sender, EventArgs e)
+        {
+            txtCNPJ.Focus();
+        }
+
+        private void cmbPessoa_Leave(object sender, EventArgs e)
+        {
+            if(cmbPessoa.Text == "FÍSICA")
+            {
+                lblCNPJ.Text = "CPF";
+                lblIE.Text = "RG/CNH";
+            } else
+            {
+                lblCNPJ.Text = "CNPJ";
+                lblIE.Text = "I. Estadual";
+            }
+        }
+
+        private void txtCep_TextChanged(object sender, EventArgs e)
+        {
+            txtCep.Text = Funcoes.Formata_Cep(txtCep.Text);
+            SendKeys.SendWait("{END}");
+
+        }
+
+        private void txtTelefone_TextChanged(object sender, EventArgs e)
+        {
+            txtTelefone.Text = Funcoes.Formata_TelefoneFixo(txtTelefone.Text);
+            SendKeys.SendWait("{END}");
+        }
+
+        private void txtCelular_TextChanged(object sender, EventArgs e)
+        {
+            txtCelular.Text = Funcoes.Formata_Celular(txtCelular.Text);
+            SendKeys.SendWait("{END}");
         }
     }
 }
