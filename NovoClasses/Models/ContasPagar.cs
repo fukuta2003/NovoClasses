@@ -77,16 +77,60 @@ namespace NovoClasses.Models
         }
 
        
-        public void MontaGrade()
+        public void MontaGrade(string pOrdem, string pDe, string pAte, string pFornecedor, string pCentroCusto)
         {
+            // pOrdem -> EMISSAO , VENCIMENTO , BAIXA
+
             contas = new List<ContasPagar>();
+            string StrQuery = "";
 
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
             }
 
-            string StrQuery = "SELECT * FROM CONTASPAGAR WITH (INDEX(i_Vencimento)) ORDER BY Vencimento";
+            string xOrdem = pOrdem.ToString();
+
+            switch (xOrdem)
+            {
+                case "EMISSAO":
+                   StrQuery = "SELECT * FROM CONTASPAGAR WITH (INDEX(i_EMISSAO)) WHERE " +
+                        "EMISSAO >= '"+pDe.ToString() + 
+                        "' AND EMISSAO <= '" + pAte.ToString() + "'";
+                   break;
+                case "VENCIMENTO":
+                    StrQuery = "SELECT * FROM CONTASPAGAR WITH (INDEX(i_Vencimento)) WHERE " +
+                        "VENCIMENTO >= '" + pDe.ToString() +
+                        "' AND VENCIMENTO <= '" + pAte.ToString() + "'";
+                    break;
+                case "BAIXA":
+                    StrQuery = "SELECT * FROM CONTASPAGAR WITH (INDEX(i_Baixa)) WHERE " +
+                        "BAIXA >= '" + pDe.ToString() +
+                        "' AND BAIXA <= '" + pAte.ToString() + "'";
+                    break;
+                default:
+                    StrQuery = "SELECT * FROM CONTASPAGAR WITH (INDEX(i_Vencimento))";
+                    break;
+            }
+
+            if (!string.IsNullOrEmpty(pFornecedor.ToString()))
+            {
+                StrQuery += " AND FORNECEDOR = " + pFornecedor.ToString();
+            }
+
+            pCentroCusto = pCentroCusto.Replace(" ", "");
+
+            if (pCentroCusto.ToString() == ".")
+            {
+                pCentroCusto = "";
+            }
+
+            if (!string.IsNullOrEmpty(pCentroCusto.ToString()))
+            {
+                StrQuery += " AND CENTROCUSTO = " + pCentroCusto.ToString();
+            }
+
+
             SqlCommand CMD = new SqlCommand();
             CMD.CommandText = StrQuery;
             CMD.CommandType = CommandType.Text;
@@ -115,7 +159,7 @@ namespace NovoClasses.Models
 
         }
 
-        
+
         public void CarregaCentroCustos()
         {
             if(!Conecta())
@@ -388,9 +432,9 @@ namespace NovoClasses.Models
 
         }
 
-       
+
 
     }
 
-    
+
 }

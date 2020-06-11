@@ -43,20 +43,20 @@
             this.optVencimento = new System.Windows.Forms.RadioButton();
             this.optPagamento = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.txtAte = new System.Windows.Forms.DateTimePicker();
+            this.txtDe = new System.Windows.Forms.DateTimePicker();
             this.lblTotalDocumentos = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblCentroCusto = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.lblFornecedor = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtFornecedor = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnPesquisar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
+            this.txtCentroCustos = new System.Windows.Forms.MaskedTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -172,8 +172,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dateTimePicker2);
-            this.groupBox1.Controls.Add(this.dateTimePicker1);
+            this.groupBox1.Controls.Add(this.txtAte);
+            this.groupBox1.Controls.Add(this.txtDe);
             this.groupBox1.Location = new System.Drawing.Point(99, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(253, 63);
@@ -181,23 +181,23 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Data Intervalo";
             // 
-            // dateTimePicker2
+            // txtAte
             // 
-            this.dateTimePicker2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker2.Location = new System.Drawing.Point(131, 23);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(107, 22);
-            this.dateTimePicker2.TabIndex = 1;
+            this.txtAte.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAte.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.txtAte.Location = new System.Drawing.Point(131, 23);
+            this.txtAte.Name = "txtAte";
+            this.txtAte.Size = new System.Drawing.Size(107, 22);
+            this.txtAte.TabIndex = 1;
             // 
-            // dateTimePicker1
+            // txtDe
             // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(6, 23);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(107, 22);
-            this.dateTimePicker1.TabIndex = 0;
+            this.txtDe.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDe.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.txtDe.Location = new System.Drawing.Point(6, 23);
+            this.txtDe.Name = "txtDe";
+            this.txtDe.Size = new System.Drawing.Size(107, 22);
+            this.txtDe.TabIndex = 0;
             // 
             // lblTotalDocumentos
             // 
@@ -223,9 +223,9 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.txtCentroCustos);
+            this.groupBox2.Controls.Add(this.lblCentroCusto);
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.textBox1);
             this.groupBox2.Controls.Add(this.lblFornecedor);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.txtFornecedor);
@@ -237,14 +237,14 @@
             this.groupBox2.Text = "Outros Filtros";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
-            // label4
+            // lblCentroCusto
             // 
-            this.label4.BackColor = System.Drawing.Color.Gold;
-            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label4.Location = new System.Drawing.Point(150, 46);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(344, 21);
-            this.label4.TabIndex = 14;
+            this.lblCentroCusto.BackColor = System.Drawing.Color.Gold;
+            this.lblCentroCusto.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblCentroCusto.Location = new System.Drawing.Point(150, 46);
+            this.lblCentroCusto.Name = "lblCentroCusto";
+            this.lblCentroCusto.Size = new System.Drawing.Size(344, 21);
+            this.lblCentroCusto.TabIndex = 14;
             // 
             // label5
             // 
@@ -254,13 +254,6 @@
             this.label5.Size = new System.Drawing.Size(73, 13);
             this.label5.TabIndex = 13;
             this.label5.Text = "Centro Custos";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(85, 46);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(68, 20);
-            this.textBox1.TabIndex = 12;
             // 
             // lblFornecedor
             // 
@@ -282,25 +275,26 @@
             // 
             // txtFornecedor
             // 
-            this.txtFornecedor.Location = new System.Drawing.Point(85, 19);
+            this.txtFornecedor.Location = new System.Drawing.Point(99, 19);
             this.txtFornecedor.Name = "txtFornecedor";
-            this.txtFornecedor.Size = new System.Drawing.Size(68, 20);
+            this.txtFornecedor.Size = new System.Drawing.Size(54, 20);
             this.txtFornecedor.TabIndex = 9;
             this.txtFornecedor.TextChanged += new System.EventHandler(this.txtFornecedor_TextChanged);
             this.txtFornecedor.Leave += new System.EventHandler(this.txtFornecedor_Leave);
             // 
-            // button1
+            // btnPesquisar
             // 
-            this.button1.BackgroundImage = global::NovoClasses.Properties.Resources.pesquisar;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(896, 20);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(113, 55);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Pesquisar";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnPesquisar.BackgroundImage = global::NovoClasses.Properties.Resources.pesquisar;
+            this.btnPesquisar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPesquisar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPesquisar.Location = new System.Drawing.Point(896, 20);
+            this.btnPesquisar.Name = "btnPesquisar";
+            this.btnPesquisar.Size = new System.Drawing.Size(113, 55);
+            this.btnPesquisar.TabIndex = 8;
+            this.btnPesquisar.Text = "Pesquisar";
+            this.btnPesquisar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnPesquisar.UseVisualStyleBackColor = true;
+            this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
             // 
             // label1
             // 
@@ -318,6 +312,16 @@
             this.txtID.Size = new System.Drawing.Size(58, 20);
             this.txtID.TabIndex = 9;
             // 
+            // txtCentroCustos
+            // 
+            this.txtCentroCustos.Location = new System.Drawing.Point(99, 47);
+            this.txtCentroCustos.Mask = "aaa,aaa";
+            this.txtCentroCustos.Name = "txtCentroCustos";
+            this.txtCentroCustos.Size = new System.Drawing.Size(54, 20);
+            this.txtCentroCustos.TabIndex = 11;
+            this.txtCentroCustos.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.txtCentroCustos_MaskInputRejected);
+            this.txtCentroCustos.Leave += new System.EventHandler(this.txtCentroCustos_Leave);
+            // 
             // fContasPagar_Show
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -325,7 +329,7 @@
             this.ClientSize = new System.Drawing.Size(1038, 450);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtID);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnPesquisar);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblTotalDocumentos);
@@ -362,19 +366,19 @@
         private System.Windows.Forms.RadioButton optVencimento;
         private System.Windows.Forms.RadioButton optPagamento;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker txtAte;
+        private System.Windows.Forms.DateTimePicker txtDe;
         private System.Windows.Forms.Label lblTotalDocumentos;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label lblFornecedor;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtFornecedor;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnPesquisar;
+        private System.Windows.Forms.Label lblCentroCusto;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtID;
+        private System.Windows.Forms.MaskedTextBox txtCentroCustos;
     }
 }

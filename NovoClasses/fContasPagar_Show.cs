@@ -8,6 +8,8 @@ namespace NovoClasses
     public partial class fContasPagar_Show : Form
     {
         ContasPagar cp = new ContasPagar();
+        CentroCustos cc = new CentroCustos();
+
         ListViewItem item;
         double TotalDocumentos = 0;
         int xId = 0;
@@ -26,7 +28,7 @@ namespace NovoClasses
         private void fContasPagar_Show_Load(object sender, EventArgs e)
         {
 
-            cp.MontaGrade();
+            cp.MontaGrade("VENCIMENTO","","","","");
             
             CarregaDadosnaGrade();
 
@@ -36,6 +38,7 @@ namespace NovoClasses
 
         public void CarregaDadosnaGrade()
         {
+            listView1.Items.Clear();
             
             foreach(ContasPagar c in cp.contas)
             {
@@ -96,22 +99,68 @@ namespace NovoClasses
         private void txtFornecedor_Leave(object sender, EventArgs e)
         {
 
-
-            if (cp.ConsultaFornecedorID(int.Parse(txtFornecedor.Text)))
+            if (!string.IsNullOrEmpty(txtFornecedor.Text))
             {
-                lblFornecedor.Text = cp.Fornecedor_Nome.ToString();
+                if (cp.ConsultaFornecedorID(int.Parse(txtFornecedor.Text)))
+                {
+                    lblFornecedor.Text = cp.Fornecedor_Nome.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Fornecedor não encontrado !");
+                    txtFornecedor.Focus();
+
+                }
+
             } else
             {
-                MessageBox.Show("Fornecedor não encontrado !");
-                txtFornecedor.Focus();
-
+                lblFornecedor.Text = "";
             }
-            
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnPesquisar_Click(object sender, EventArgs e)
+        {
+            if(optEmissao.Checked==true) { 
+                 cp.MontaGrade("EMISSAO", txtDe.Text, txtAte.Text, txtFornecedor.Text, txtCentroCustos.Text);
+            } else if (optVencimento.Checked==true) {
+                cp.MontaGrade("VENCIMENTO", txtDe.Text, txtAte.Text, txtFornecedor.Text, txtCentroCustos.Text);
+            } else if (optPagamento.Checked==true) {
+                cp.MontaGrade("BAIXA", txtDe.Text, txtAte.Text, txtFornecedor.Text, txtCentroCustos.Text);
+            }
+            CarregaDadosnaGrade();
+        }
+
+        private void txtCentroCustos_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+            
+        }
+
+        private void txtCentroCustos_Leave(object sender, EventArgs e)
+        {
+            string xCentro;
+            xCentro = txtCentroCustos.Text.Replace(" ", "");
+            if (xCentro.ToString() == ".")
+            {
+                xCentro = "";
+            }
+           
+            if (!string.IsNullOrEmpty(xCentro))
+            {
+                if (cc.Consulta(xCentro.ToString()))
+                {
+                    lblCentroCusto.Text = cc.Descricao.ToString();
+                } else
+                {
+                    MessageBox.Show("Centro de Custos não encontrado !");
+
+                }
+
+            }
         }
     }
 }
