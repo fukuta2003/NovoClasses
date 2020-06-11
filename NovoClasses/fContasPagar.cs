@@ -109,6 +109,8 @@ namespace NovoClasses
             {
                 InsereDadosnaClasse();  // PASSAR CONTEUDO DO FORMULARIO PARA CLASSE
                 cp3.InserirDados(wpIncluir); // SALVAR NO BANCO DE DADOS
+                LimpaCaixasTexto();
+                txtID.Focus();
                 
             } else
             {

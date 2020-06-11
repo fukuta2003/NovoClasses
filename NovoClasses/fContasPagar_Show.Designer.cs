@@ -43,11 +43,13 @@
             this.optVencimento = new System.Windows.Forms.RadioButton();
             this.optPagamento = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkMesInteiro = new System.Windows.Forms.CheckBox();
             this.txtAte = new System.Windows.Forms.DateTimePicker();
             this.txtDe = new System.Windows.Forms.DateTimePicker();
             this.lblTotalDocumentos = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtCentroCustos = new System.Windows.Forms.MaskedTextBox();
             this.lblCentroCusto = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lblFornecedor = new System.Windows.Forms.Label();
@@ -56,14 +58,14 @@
             this.btnPesquisar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
-            this.txtCentroCustos = new System.Windows.Forms.MaskedTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // listView1
             // 
-            this.listView1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.listView1.BackColor = System.Drawing.Color.White;
+            this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colID,
             this.colDocumento,
@@ -75,6 +77,7 @@
             this.colCcusto,
             this.colValorDocumento,
             this.colPG});
+            this.listView1.ForeColor = System.Drawing.Color.Black;
             this.listView1.FullRowSelect = true;
             this.listView1.GridLines = true;
             this.listView1.HideSelection = false;
@@ -172,14 +175,26 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkMesInteiro);
             this.groupBox1.Controls.Add(this.txtAte);
             this.groupBox1.Controls.Add(this.txtDe);
             this.groupBox1.Location = new System.Drawing.Point(99, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(253, 63);
+            this.groupBox1.Size = new System.Drawing.Size(253, 71);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Data Intervalo";
+            // 
+            // chkMesInteiro
+            // 
+            this.chkMesInteiro.AutoSize = true;
+            this.chkMesInteiro.Location = new System.Drawing.Point(6, 49);
+            this.chkMesInteiro.Name = "chkMesInteiro";
+            this.chkMesInteiro.Size = new System.Drawing.Size(78, 17);
+            this.chkMesInteiro.TabIndex = 2;
+            this.chkMesInteiro.Text = "Mês Inteiro";
+            this.chkMesInteiro.UseVisualStyleBackColor = true;
+            this.chkMesInteiro.Click += new System.EventHandler(this.chkMesInteiro_Click);
             // 
             // txtAte
             // 
@@ -231,17 +246,28 @@
             this.groupBox2.Controls.Add(this.txtFornecedor);
             this.groupBox2.Location = new System.Drawing.Point(358, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(509, 71);
+            this.groupBox2.Size = new System.Drawing.Size(502, 71);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Outros Filtros";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // txtCentroCustos
+            // 
+            this.txtCentroCustos.Location = new System.Drawing.Point(90, 48);
+            this.txtCentroCustos.Mask = "aaa,aaa";
+            this.txtCentroCustos.Name = "txtCentroCustos";
+            this.txtCentroCustos.Size = new System.Drawing.Size(54, 20);
+            this.txtCentroCustos.TabIndex = 11;
+            this.txtCentroCustos.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.txtCentroCustos_MaskInputRejected);
+            this.txtCentroCustos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCentroCustos_KeyDown);
+            this.txtCentroCustos.Leave += new System.EventHandler(this.txtCentroCustos_Leave);
+            // 
             // lblCentroCusto
             // 
             this.lblCentroCusto.BackColor = System.Drawing.Color.Gold;
             this.lblCentroCusto.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblCentroCusto.Location = new System.Drawing.Point(150, 46);
+            this.lblCentroCusto.Location = new System.Drawing.Point(150, 48);
             this.lblCentroCusto.Name = "lblCentroCusto";
             this.lblCentroCusto.Size = new System.Drawing.Size(344, 21);
             this.lblCentroCusto.TabIndex = 14;
@@ -275,7 +301,7 @@
             // 
             // txtFornecedor
             // 
-            this.txtFornecedor.Location = new System.Drawing.Point(99, 19);
+            this.txtFornecedor.Location = new System.Drawing.Point(90, 19);
             this.txtFornecedor.Name = "txtFornecedor";
             this.txtFornecedor.Size = new System.Drawing.Size(54, 20);
             this.txtFornecedor.TabIndex = 9;
@@ -287,9 +313,10 @@
             this.btnPesquisar.BackgroundImage = global::NovoClasses.Properties.Resources.pesquisar;
             this.btnPesquisar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnPesquisar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPesquisar.Location = new System.Drawing.Point(896, 20);
+            this.btnPesquisar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPesquisar.Location = new System.Drawing.Point(936, 12);
             this.btnPesquisar.Name = "btnPesquisar";
-            this.btnPesquisar.Size = new System.Drawing.Size(113, 55);
+            this.btnPesquisar.Size = new System.Drawing.Size(95, 71);
             this.btnPesquisar.TabIndex = 8;
             this.btnPesquisar.Text = "Pesquisar";
             this.btnPesquisar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -304,6 +331,7 @@
             this.label1.Size = new System.Drawing.Size(18, 13);
             this.label1.TabIndex = 10;
             this.label1.Text = "ID";
+            this.label1.Visible = false;
             // 
             // txtID
             // 
@@ -311,16 +339,7 @@
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(58, 20);
             this.txtID.TabIndex = 9;
-            // 
-            // txtCentroCustos
-            // 
-            this.txtCentroCustos.Location = new System.Drawing.Point(99, 47);
-            this.txtCentroCustos.Mask = "aaa,aaa";
-            this.txtCentroCustos.Name = "txtCentroCustos";
-            this.txtCentroCustos.Size = new System.Drawing.Size(54, 20);
-            this.txtCentroCustos.TabIndex = 11;
-            this.txtCentroCustos.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.txtCentroCustos_MaskInputRejected);
-            this.txtCentroCustos.Leave += new System.EventHandler(this.txtCentroCustos_Leave);
+            this.txtID.Visible = false;
             // 
             // fContasPagar_Show
             // 
@@ -339,9 +358,11 @@
             this.Controls.Add(this.optEmissao);
             this.Controls.Add(this.listView1);
             this.Name = "fContasPagar_Show";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Contas a Pagar - Show";
             this.Load += new System.EventHandler(this.fContasPagar_Show_Load);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
@@ -380,5 +401,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.MaskedTextBox txtCentroCustos;
+        private System.Windows.Forms.CheckBox chkMesInteiro;
     }
 }

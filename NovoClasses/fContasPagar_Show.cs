@@ -9,6 +9,7 @@ namespace NovoClasses
     {
         ContasPagar cp = new ContasPagar();
         CentroCustos cc = new CentroCustos();
+        Validacao vl = new Validacao();
 
         ListViewItem item;
         double TotalDocumentos = 0;
@@ -28,7 +29,9 @@ namespace NovoClasses
         private void fContasPagar_Show_Load(object sender, EventArgs e)
         {
 
+            listView1.GridLines = true;
             cp.MontaGrade("VENCIMENTO","","","","");
+
             
             CarregaDadosnaGrade();
 
@@ -159,6 +162,32 @@ namespace NovoClasses
                     MessageBox.Show("Centro de Custos não encontrado !");
 
                 }
+
+            }
+        }
+
+        private void txtCentroCustos_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F2)
+            {
+                fShow fsw = new fShow("CENTROCUSTOS",
+                    new string[] { "Codigo", "Descricao" }, "Codigo");
+                fsw.ShowDialog();
+                txtCentroCustos.Text = fsw.ParametroID.ToString();
+                if (txtCentroCustos.Text != "")
+                {
+                    SendKeys.SendWait("{TAB}");
+                }
+            }
+        }
+
+        private void chkMesInteiro_Click(object sender, EventArgs e)
+        {
+            if (chkMesInteiro.Checked == true)
+            {
+                vl.MesInicioFim();
+                txtDe.Text = vl.DataInicial.ToString();
+                txtAte.Text = vl.DataFinal.ToString();
 
             }
         }

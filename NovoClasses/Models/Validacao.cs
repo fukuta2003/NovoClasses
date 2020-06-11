@@ -10,6 +10,9 @@ namespace NovoClasses.Models
 {
     public class Validacao
     {
+        public string DataInicial { get; set; }
+        public string DataFinal { get; set; }
+
         public static void RetornarMascara(object sender, EventArgs e)
         {
             TextBox txt = (TextBox)sender;
@@ -110,6 +113,37 @@ namespace NovoClasses.Models
             return apenasDigitos.Replace(str, "");
         }
 
+        public void MesInicioFim()
+        {
+            DateTime Hoje;
+            string xAno,xProxAno;
+            string xMes,xProxMes;
+            DateTime xDataInicial, xDataFinal;
+
+            Hoje = DateTime.Today;
+            xAno = Hoje.Year.ToString();
+            xMes = Hoje.Month.ToString();
+            if(xMes=="12")
+            {
+                xProxMes = "01";
+                xProxAno = ((Hoje.Year) + 1).ToString();
+                xDataFinal = DateTime.Parse("01/" + xProxMes + "/" + xProxAno);
+            } else
+            {
+                xProxMes = ((Hoje.Month) + 1).ToString();
+                xDataFinal = DateTime.Parse("01/" + xProxMes + "/" + xAno);
+
+            }
+
+            xMes = xMes.ToString().PadLeft(2, '0');
+
+            xDataInicial = DateTime.Parse("01/" + xMes.ToString() + "/" + xAno.ToString());
+            xDataInicial = DateTime.Parse("01/" + xMes.ToString() + "/" + xAno.ToString());
+            DataInicial = xDataInicial.ToString();
+            xDataFinal = xDataFinal.AddDays(-1);
+            DataFinal = xDataFinal.ToString();
+
+        }
 
 
     }
