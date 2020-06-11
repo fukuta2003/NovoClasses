@@ -249,10 +249,7 @@ namespace NovoClasses
 
         private void txtDocumento_Leave(object sender, EventArgs e)
         {
-            if (txtDocumento.Text == "") {
-                MessageBox.Show("Documento em Branco !");
-                txtDocumento.Focus();
-            }
+           
         }
 
         private void txtDocumento_TextChanged(object sender, EventArgs e)
@@ -270,9 +267,36 @@ namespace NovoClasses
         {
             if (e.KeyCode==Keys.Escape)
             {
-                MessageBox.Show("ESC PRESSIONADA NO FORMULARIO TODO");
+                if(ActiveControl.Name.ToUpper() == "TXTID")
+                {
+                    this.Close();
+                } else
+                {
+                    LimpaCaixasTexto();
+                    txtID.Focus();
+                }
             }
         }
+
+        private void LimpaCaixasTexto()
+        {
+            txtID.Text = "";
+            txtDocumento.Text = "";
+            txtData.Text = "";
+            txtFornecedor.Text = "";
+            lblFornecedor.Text = "";
+            txtEmissao.Text = "";
+            txtVencimento.Text = "";
+            lblDataPagamento.Text = "";
+            txtValorBruto.Text = "";
+            txtJuros.Text = "";
+            txtDesconto.Text = "";
+            lblTotalDocumento.Text = "";
+            txtCentrodeCustos.Text = "";
+            lblCentrodeCustos.Text = "";
+            txtHistorico.Text = "";
+        }
+
 
         private void txtFornecedor_KeyDown(object sender, KeyEventArgs e)
         {

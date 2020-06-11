@@ -61,6 +61,7 @@ namespace NovoClasses
 
 
             // conexao com o banco de dados
+
             Conexao();
 
             AbreTabela(Tabela,Campos);

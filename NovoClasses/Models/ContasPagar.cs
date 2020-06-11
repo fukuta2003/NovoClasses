@@ -76,17 +76,7 @@ namespace NovoClasses.Models
             return ValorDocumento;
         }
 
-        public void Conecta()
-        {
-            conn.Open();
-            string sql = "SELECT * FROM Fornecedores";
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.ExecuteNonQuery();
-            conn.Close();
-
-
-        }
-
+       
         public void MontaGrade()
         {
             contas = new List<ContasPagar>();
@@ -125,11 +115,13 @@ namespace NovoClasses.Models
 
         }
 
+        
         public void CarregaCentroCustos()
         {
-            if (conn.State == ConnectionState.Closed)
+            if(!Conecta())
             {
-                conn.Open();
+                MessageBox.Show("Banco de Dados não conectado !");
+                return;
             }
 
             String StrQuery = "SELECT Codigo, Descricao FROM CENTROCUSTOS WITH (INDEX(i_DESCRICAO)) ORDER BY DESCRICAO";
@@ -158,11 +150,12 @@ namespace NovoClasses.Models
         public void ConsultaCentroCustosID(string pCodigo)
         {
 
-            if(conn.State == ConnectionState.Closed)
+            if (!Conecta())
             {
-                conn.Open();
+                MessageBox.Show("Banco de Dados não conectado !");
+                return;
             }
-            
+
             string StrQuery = "SELECT CODIGO,DESCRICAO FROM CENTROCUSTOS WITH (INDEX(i_CODIGO)) WHERE CODIGO='" + pCodigo + "'";
             SqlCommand CMD = new SqlCommand();
             CMD.CommandText = StrQuery;
@@ -186,9 +179,10 @@ namespace NovoClasses.Models
         {
             bool xRetorno = false;
 
-            if (conn.State == ConnectionState.Closed)
+            if (!Conecta())
             {
-                conn.Open();
+                MessageBox.Show("Banco de Dados não conectado !");
+                return false;
             }
 
             int xId = int.Parse(Id.ToString());
@@ -234,9 +228,10 @@ namespace NovoClasses.Models
 
         public bool InserirDados(bool pIncluir)
         {
-            if(conn.State == ConnectionState.Closed)
+            if (!Conecta())
             {
-                conn.Open();
+                MessageBox.Show("Banco de Dados não conectado !");
+                return false;
             }
             String strquery;
 
@@ -325,11 +320,12 @@ namespace NovoClasses.Models
         {
             bool ret = false;
 
-            if (conn.State == ConnectionState.Closed)
+            if (!Conecta())
             {
-                conn.Open();
-
+                MessageBox.Show("Banco de Dados não conectado !");
+                return false;
             }
+
             string StrQuery = "SELECT Id,Nome FROM Fornecedores WITH (INDEX(i_ID)) WHERE Id = " + pID.ToString();
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = StrQuery;
@@ -358,7 +354,12 @@ namespace NovoClasses.Models
         {
             int x = 0;
 
-            conn.Open();
+            if (!Conecta())
+            {
+                MessageBox.Show("Banco de Dados não conectado !");
+                return;
+            }
+
             String StrQuery = "SELECT Id,Nome FROM Fornecedores WITH (INDEX(i_nome)) ORDER BY Nome";
             SqlCommand cmd = new SqlCommand();
             cmd = new SqlCommand(StrQuery, conn);

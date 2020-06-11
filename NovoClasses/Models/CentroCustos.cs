@@ -54,12 +54,12 @@ namespace NovoClasses.Models
             bool ret = false;
 
             Inicializa();
-
-            if (conn.State == ConnectionState.Closed)
+            if (!Conecta())
             {
-                conn.Open();
-
+                MessageBox.Show("Erro: O Banco de Dados não está conectado !");
+                return false;
             }
+
             string StrQuery = "SELECT * FROM CENTROCUSTOS WITH (INDEX(i_CODIGO)) WHERE codigo = '" + pCodigo.ToString()+"'";
             SqlCommand cmd = new SqlCommand(StrQuery, conn);
             //cmd.CommandText = StrQuery;
@@ -104,9 +104,10 @@ namespace NovoClasses.Models
         public bool Salvar_Dados(bool pIncluir)
         {
 
-            if (conn.State == ConnectionState.Closed)
+            if (!Conecta())
             {
-                conn.Open();
+                MessageBox.Show("Erro: O Banco de Dados não está conectado !");
+                return false;
             }
             String strquery;
 
@@ -204,11 +205,12 @@ namespace NovoClasses.Models
 
             Inicializa();
 
-            if (conn.State == ConnectionState.Closed)
+            if (!Conecta())
             {
-                conn.Open();
-
+                MessageBox.Show("Erro: O Banco de Dados não está conectado !");
+                return false;
             }
+
             string StrQuery = "DELETE FROM Fornecedores WITH (INDEX(I_CODIGO)) WHERE codigo = '" + pId.ToString() + "'";
             SqlCommand cmd = new SqlCommand(StrQuery, conn);
             //cmd.CommandText = StrQuery;
