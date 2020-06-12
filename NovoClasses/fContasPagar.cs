@@ -543,11 +543,20 @@ namespace NovoClasses
                     // chamando a funcao BuscaDados();
                     // ALTERAR AO CLICAR EM SALVAR
 
-                    btnSalvar.Enabled = true;
-                    btnExcluir.Enabled = true;
-                    btnBaixar.Enabled = true;
-
                     BuscaDados(); // função abaixo que retorna os dados da classe para o formulário
+
+                    if (cp3.Pago=="S")
+                    {
+                        btnSalvar.Enabled = false;
+                        btnExcluir.Enabled = false;
+                        btnBaixar.Enabled = true;
+                        btnBaixar.Text = "Estornar";
+
+                    } else { 
+                        btnSalvar.Enabled = true;
+                        btnExcluir.Enabled = true;
+                        btnBaixar.Enabled = true;
+                    }
                     wpIncluir = false; // false não vai incluir, apenas alterar (update)
                     txtDocumento.Focus();
 
@@ -576,6 +585,10 @@ namespace NovoClasses
             txtCentrodeCustos.Text = cp3.CentroCusto.ToString();
             lblCentrodeCustos.Text = cp3.CentroCusto_Descricao.ToString();
             txtHistorico.Text = cp3.Historico.ToString();
+            if(!string.IsNullOrEmpty(cp3.DataPagamento.ToString()))
+            {
+                lblDataPagamento.Text = cp3.DataPagamento.ToString();
+            }
 
             
 

@@ -28,7 +28,7 @@ namespace NovoClasses.Models
         public String CentroCusto { get; set; }
         public String CentroCusto_Descricao { get; set; }
         public String Historico { get; set; }
-        public String Pago { get; set; }
+        public string Pago { get; set; }
         public double ValorPago { get; set; }
         
         public ArrayList wlFornecedores = new ArrayList();
@@ -44,7 +44,7 @@ namespace NovoClasses.Models
 
         }
 
-        public ContasPagar(int id, string documento, int fornecedor, string fornecedor_Nome, DateTime dataEmissao, DateTime dataVencimento, DateTime dataPagamento, double valorDocumento, string centroCusto, String pago)
+        public ContasPagar(int id, string documento, int fornecedor, string fornecedor_Nome, DateTime dataEmissao, DateTime dataVencimento, DateTime dataPagamento, double valorDocumento, string centroCusto, string pago)
         {
             Id = id;
             Documento = documento;
@@ -55,7 +55,7 @@ namespace NovoClasses.Models
             DataPagamento = dataPagamento;
             ValorDocumento = valorDocumento;
             CentroCusto = centroCusto;
-            Pago = Pago;
+            Pago = pago;
         }
 
         public ContasPagar(string documento, int fornecedor, DateTime dataEmissao, DateTime dataVencimento, double valorBruto, string centroCusto, string historico)
@@ -248,7 +248,12 @@ namespace NovoClasses.Models
                     Fornecedor_Nome = dr["fornecedor_nome"].ToString();
                     DataEmissao = DateTime.Parse(dr["emissao"].ToString());
                     DataVencimento = DateTime.Parse(dr["vencimento"].ToString());
+                    if(!string.IsNullOrEmpty(dr["baixa"].ToString()))
+                    {
+                        DataPagamento = DateTime.Parse(dr["baixa"].ToString());
+                        Pago = dr["pago"].ToString();
 
+                    }
                     // ignorar a baixa por enquanto
 
                     ValorBruto = double.Parse(dr["valorbruto"].ToString());

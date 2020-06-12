@@ -56,7 +56,12 @@ namespace NovoClasses
                 item.SubItems.Add(c.Fornecedor_Nome.ToString());
                 item.SubItems.Add(c.DataEmissao.ToString("dd/MM/yyyy"));
                 item.SubItems.Add(c.DataVencimento.ToString("dd/MM/yyyy"));
-                item.SubItems.Add(c.DataPagamento.ToString("dd/MM/yyyy"));
+                if(c.Pago=="S") { 
+                    item.SubItems.Add(c.DataPagamento.ToString("dd/MM/yyyy"));
+                } else
+                {
+                    item.SubItems.Add("__/__/____");
+                }
                 item.SubItems.Add(c.CentroCusto.ToString());
                 item.SubItems.Add(c.ValorDocumento.ToString("n"));
                 if(c.Pago=="S")
