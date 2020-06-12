@@ -77,9 +77,9 @@
             this.label1.Location = new System.Drawing.Point(11, 15);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(25, 13);
+            this.label1.Size = new System.Drawing.Size(75, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "ID *";
+            this.label1.Text = "ID (F2-Extrato)";
             // 
             // txtID
             // 
@@ -89,6 +89,7 @@
             this.txtID.Size = new System.Drawing.Size(64, 20);
             this.txtID.TabIndex = 1;
             this.txtID.TextChanged += new System.EventHandler(this.txtID_TextChanged);
+            this.txtID.Enter += new System.EventHandler(this.txtID_Enter);
             this.txtID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtID_KeyDown);
             this.txtID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtID_KeyPress);
             this.txtID.Leave += new System.EventHandler(this.txtID_Leave);
@@ -308,6 +309,7 @@
             // btnSalvar
             // 
             this.btnSalvar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnSalvar.Enabled = false;
             this.btnSalvar.Location = new System.Drawing.Point(16, 366);
             this.btnSalvar.Margin = new System.Windows.Forms.Padding(2);
             this.btnSalvar.Name = "btnSalvar";
@@ -320,6 +322,7 @@
             // btnExcluir
             // 
             this.btnExcluir.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnExcluir.Enabled = false;
             this.btnExcluir.Location = new System.Drawing.Point(107, 366);
             this.btnExcluir.Margin = new System.Windows.Forms.Padding(2);
             this.btnExcluir.Name = "btnExcluir";
@@ -344,6 +347,7 @@
             // 
             this.btnBaixar.BackColor = System.Drawing.Color.DarkSalmon;
             this.btnBaixar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnBaixar.Enabled = false;
             this.btnBaixar.Location = new System.Drawing.Point(340, 366);
             this.btnBaixar.Margin = new System.Windows.Forms.Padding(2);
             this.btnBaixar.Name = "btnBaixar";

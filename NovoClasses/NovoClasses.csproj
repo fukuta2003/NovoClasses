@@ -59,6 +59,12 @@
     <Compile Include="fContasPagar.Designer.cs">
       <DependentUpon>fContasPagar.cs</DependentUpon>
     </Compile>
+    <Compile Include="fContasPagar_Baixa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fContasPagar_Baixa.Designer.cs">
+      <DependentUpon>fContasPagar_Baixa.cs</DependentUpon>
+    </Compile>
     <Compile Include="fContasPagar_Show.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="fContasPagar.resx">
       <DependentUpon>fContasPagar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fContasPagar_Baixa.resx">
+      <DependentUpon>fContasPagar_Baixa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fContasPagar_Show.resx">
       <DependentUpon>fContasPagar_Show.cs</DependentUpon>
@@ -126,6 +135,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\pesquisar.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pay2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\backgroundmoney.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

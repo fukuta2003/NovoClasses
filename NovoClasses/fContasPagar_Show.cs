@@ -12,7 +12,7 @@ namespace NovoClasses
         Validacao vl = new Validacao();
 
         ListViewItem item;
-        double TotalDocumentos = 0;
+        double TotalDocumentos = 0, TotalPago = 0, TotalAberto = 0;
         int xId = 0;
 
         public String ParametroID
@@ -41,6 +41,9 @@ namespace NovoClasses
 
         public void CarregaDadosnaGrade()
         {
+            TotalDocumentos = 0;
+            TotalPago = 0;
+            TotalAberto = 0;
             listView1.Items.Clear();
             
             foreach(ContasPagar c in cp.contas)
@@ -56,13 +59,14 @@ namespace NovoClasses
                 item.SubItems.Add(c.DataPagamento.ToString("dd/MM/yyyy"));
                 item.SubItems.Add(c.CentroCusto.ToString());
                 item.SubItems.Add(c.ValorDocumento.ToString("n"));
-                if(c.Pago=="SIM")
+                if(c.Pago=="S")
                 {
                     item.SubItems.Add("Pago");
-
+                    TotalPago += double.Parse(c.ValorDocumento.ToString());
                 } else
                 {
                     item.SubItems.Add("Aberto");
+                    TotalAberto += double.Parse(c.ValorDocumento.ToString());
                 }
                 TotalDocumentos += double.Parse(c.ValorDocumento.ToString());
 
@@ -70,10 +74,8 @@ namespace NovoClasses
             }
 
             lblTotalDocumentos.Text = TotalDocumentos.ToString("N");
-
-
-            
-
+            lblTotalAberto.Text = TotalAberto.ToString("N");
+            lblTotalPago.Text = TotalPago.ToString("N");
 
 
 

@@ -58,6 +58,10 @@
             this.btnPesquisar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblTotalPago = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lblTotalAberto = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -84,7 +88,7 @@
             this.listView1.Location = new System.Drawing.Point(12, 89);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(1019, 319);
+            this.listView1.Size = new System.Drawing.Size(1019, 250);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -219,9 +223,9 @@
             this.lblTotalDocumentos.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.lblTotalDocumentos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblTotalDocumentos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalDocumentos.Location = new System.Drawing.Point(858, 419);
+            this.lblTotalDocumentos.Location = new System.Drawing.Point(857, 342);
             this.lblTotalDocumentos.Name = "lblTotalDocumentos";
-            this.lblTotalDocumentos.Size = new System.Drawing.Size(97, 23);
+            this.lblTotalDocumentos.Size = new System.Drawing.Size(97, 26);
             this.lblTotalDocumentos.TabIndex = 5;
             this.lblTotalDocumentos.Text = "0,00";
             this.lblTotalDocumentos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -230,7 +234,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Location = new System.Drawing.Point(738, 424);
+            this.label2.Location = new System.Drawing.Point(737, 347);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(114, 13);
             this.label2.TabIndex = 6;
@@ -326,7 +330,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 421);
+            this.label1.Location = new System.Drawing.Point(11, 348);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(18, 13);
             this.label1.TabIndex = 10;
@@ -335,17 +339,67 @@
             // 
             // txtID
             // 
-            this.txtID.Location = new System.Drawing.Point(35, 418);
+            this.txtID.Location = new System.Drawing.Point(35, 345);
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(58, 20);
             this.txtID.TabIndex = 9;
             this.txtID.Visible = false;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Location = new System.Drawing.Point(787, 373);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(64, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Total Pagos";
+            // 
+            // lblTotalPago
+            // 
+            this.lblTotalPago.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.lblTotalPago.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblTotalPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalPago.ForeColor = System.Drawing.Color.White;
+            this.lblTotalPago.Location = new System.Drawing.Point(857, 368);
+            this.lblTotalPago.Name = "lblTotalPago";
+            this.lblTotalPago.Size = new System.Drawing.Size(97, 26);
+            this.lblTotalPago.TabIndex = 11;
+            this.lblTotalPago.Text = "0,00";
+            this.lblTotalPago.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Location = new System.Drawing.Point(776, 396);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(75, 13);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Total Devedor";
+            // 
+            // lblTotalAberto
+            // 
+            this.lblTotalAberto.BackColor = System.Drawing.Color.DarkRed;
+            this.lblTotalAberto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblTotalAberto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalAberto.ForeColor = System.Drawing.Color.White;
+            this.lblTotalAberto.Location = new System.Drawing.Point(857, 391);
+            this.lblTotalAberto.Name = "lblTotalAberto";
+            this.lblTotalAberto.Size = new System.Drawing.Size(97, 26);
+            this.lblTotalAberto.TabIndex = 13;
+            this.lblTotalAberto.Text = "0,00";
+            this.lblTotalAberto.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // fContasPagar_Show
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1038, 450);
+            this.ClientSize = new System.Drawing.Size(1038, 421);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.lblTotalAberto);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblTotalPago);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtID);
             this.Controls.Add(this.btnPesquisar);
@@ -359,7 +413,7 @@
             this.Controls.Add(this.listView1);
             this.Name = "fContasPagar_Show";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Contas a Pagar - Show";
+            this.Text = "Contas a Pagar - Extrato";
             this.Load += new System.EventHandler(this.fContasPagar_Show_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -402,5 +456,9 @@
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.MaskedTextBox txtCentroCustos;
         private System.Windows.Forms.CheckBox chkMesInteiro;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblTotalPago;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblTotalAberto;
     }
 }

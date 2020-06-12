@@ -395,6 +395,7 @@
             this.txtJaneiro.Size = new System.Drawing.Size(114, 22);
             this.txtJaneiro.TabIndex = 4;
             this.txtJaneiro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtJaneiro.TextChanged += new System.EventHandler(this.txtJaneiro_TextChanged);
             this.txtJaneiro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtJaneiro_KeyPress);
             this.txtJaneiro.Leave += new System.EventHandler(this.txtJaneiro_Leave);
             // 

@@ -29,7 +29,8 @@ namespace NovoClasses.Models
         public String CentroCusto_Descricao { get; set; }
         public String Historico { get; set; }
         public String Pago { get; set; }
-      
+        public double ValorPago { get; set; }
+        
         public ArrayList wlFornecedores = new ArrayList();
         public ArrayList wlCentroCustos = new ArrayList();
 
@@ -152,7 +153,6 @@ namespace NovoClasses.Models
                         dr["centrocusto"].ToString(),
                         dr["pago"].ToString()));
 
-
             }
 
             conn.Close();
@@ -268,6 +268,57 @@ namespace NovoClasses.Models
 
             conn.Close();
             return xRetorno;
+        }
+
+
+        // ------------- baixa de documentos
+
+
+        public bool Baixar()
+        {
+            if(!Conecta())
+            {
+                MessageBox.Show("O banco de dados não está conectado !");
+                return false;
+            }
+
+            String strquery;
+
+            strquery = "UPDATE CONTASPAGAR SET " +
+                "baixa=@baixa," +
+                "juros=@juros," +
+                "desconto=@desconto," +
+                "valordocumento=@valordocumento," +
+                "pago=@pago," + 
+                "valorpago=@valorpago WHERE id=" + Id;
+
+            SqlCommand cmd = new SqlCommand(strquery, conn);
+            cmd.Parameters.AddWithValue("@baixa", DataPagamento);
+            cmd.Parameters.AddWithValue("@juros", Juros);
+            cmd.Parameters.AddWithValue("@desconto", Desconto);
+            cmd.Parameters.AddWithValue("@valordocumento", ValorDocumento);
+            cmd.Parameters.AddWithValue("@valorpago", ValorPago);
+            cmd.Parameters.AddWithValue("@pago", Pago);
+
+            cmd.CommandType = CommandType.Text;
+            try
+            {
+                int i = cmd.ExecuteNonQuery();  // ESTA LINHA SALVA DOS DADOS NO BANCO DE DADOS E RETORNA QUANTAS LINHAS FORAM AFETADAS.
+                if (i > 0)
+                    MessageBox.Show("Documento baixado com sucesso !");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro sistema: " + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return false;
+
         }
 
         public bool InserirDados(bool pIncluir)

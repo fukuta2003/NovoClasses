@@ -147,6 +147,12 @@ namespace NovoClasses
 
         private void btnBaixar_Click(object sender, EventArgs e)
         {
+            fContasPagar_Baixa fpb = new fContasPagar_Baixa();
+            fpb.WindowState = FormWindowState.Normal;
+            fpb.StartPosition = FormStartPosition.CenterScreen;
+            fpb.ParametroID = txtID.Text;
+            fpb.ShowDialog();
+            txtID.Focus();
 
         }
 
@@ -523,6 +529,10 @@ namespace NovoClasses
             if(txtID.Text=="")
             {
                 wpIncluir = true; // INCLUIR AO CLICAR EM SALVAR
+                btnSalvar.Enabled = true;
+                btnExcluir.Enabled = false;
+                btnBaixar.Enabled = false;
+
             } else
             {
                 cp3.Id = int.Parse(txtID.Text); // passando o ID digitado para a classe.
@@ -532,6 +542,11 @@ namespace NovoClasses
                     // apos fazer a consulta devemos buscar os dados da classe e colocar no formulario
                     // chamando a funcao BuscaDados();
                     // ALTERAR AO CLICAR EM SALVAR
+
+                    btnSalvar.Enabled = true;
+                    btnExcluir.Enabled = true;
+                    btnBaixar.Enabled = true;
+
                     BuscaDados(); // função abaixo que retorna os dados da classe para o formulário
                     wpIncluir = false; // false não vai incluir, apenas alterar (update)
                     txtDocumento.Focus();
@@ -608,6 +623,15 @@ namespace NovoClasses
             cc.KeyPreview = true;
             cc.ShowDialog();
 
+
+        }
+
+        private void txtID_Enter(object sender, EventArgs e)
+        {
+            btnSalvar.Enabled = false;
+            btnExcluir.Enabled = false;
+            btnBaixar.Enabled = false;
+            LimpaCaixasTexto();
 
         }
     }
